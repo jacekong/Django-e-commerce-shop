@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search results | {{searched}}
+{% endblock title %}
+
+{% block content %}
+
+    <header class="all-page">
+        <div class="all-box">
+            <!-- back button -->
+            <a href="javascript:window.history.back();"><i class="fa-solid fa-arrow-left-long"></i></a>
+            <!-- header name -->
+            {% comment %} {% for category in categories %} {% endcomment %}
+                <p>
+                    search results for: {{searched}}
+                </p>
+            
+            <span></span>
+        </div>
+    </header>
+    <!-- menu box -->
+    <nav class="menu-bar">
+        <i class="fa-solid fa-bars" onclick="menuToggole(this);"></i>
+        <!-- <i class="fa-solid fa-xmark"></i> -->
+    </nav>
+    <br>
+    <br>
+
+    <!-- all products list -->
+    <section class="all-products-items">
+        {% if searched %}
+            {% for product in products %}
+                <a href="{% url 'productdetails' product.slug %}" class="all-items">
+                    <div class="all-products">
+                        <!-- stock status -->
+                        <span class="status">
+                            <p>{{ product.stock_status }}</p>
+                        </span>
+                        <!-- image -->
+                        {% for image in product.product_images.all|slice:":1" %}
+                            <img alt="" src="{{ image.images.url }}">
+                        {% endfor %}
+                        <!-- product info -->
+                        <div class="product-info">
+                            <!-- selling price -->
+                            <span class="price"><p>{{ product.selling_price }}rmb</p></span>
+                            <!-- name -->
+                            <span class="product-title"><p>{{ product.product_name }}</p></span>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <h3 style="text-align:center; margin: 25vh auto 0 auto;"> No results found...</h3>
+        {% endif %}
+
+    </section>
+
+
+
+{% endblock content %}

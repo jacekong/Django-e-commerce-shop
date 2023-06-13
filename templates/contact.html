@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    contact us
+
+{% endblock title %}
+
+{% block content %}
+
+    <header class="all-page">
+        <div class="all-box">
+            <!-- back button -->
+            <a href="javascript:history.back();"><i class="fa-solid fa-arrow-left-long"></i></a>
+            <!-- header name -->
+            <p>
+            </p>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="head-title">
+        <span>
+            Contact Us for more info.
+        </span>
+    </div>
+
+    {% for contact in contacts %}
+    <!-- first person -->
+    <section class="contact-list">
+        <div class="title">
+            <span class="t">
+                
+                {{contact.name}}
+                
+            </span>
+        </div>
+        <div class="qr-code">
+            <img src="{{ contact.image.url }}" alt="">
+        </div>
+        <br>
+        <div class="social-list">
+            <ul>
+                <a href="{{contact.facebook}}"><li><i class="fa-brands fa-facebook">&nbsp;&nbsp;facebook</i></li></a>
+                <a href="{{contact.whatsapp}}" style="color:rgb(79, 210, 79)"><li><i class="fa-brands fa-whatsapp">&nbsp;&nbsp;whatsapp</i></li></a>
+            </ul>
+        </div>
+    </section>
+    {% endfor %}
+    <hr style="margin: 0 3vw;">
+
+{% endblock content %}
+
+
+

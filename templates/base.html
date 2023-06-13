@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+     <!-- menu box -->
+     <nav class="menu-bar">
+        <i class="fa-solid fa-bars" onclick="menuToggole(this);"></i>
+        <!-- <i class="fa-solid fa-xmark"></i> -->
+    </nav>
+    <div class="menu-items" id="menu-box">
+        <ul class="nav-links">
+            <a href="{% url 'index' %}"><li>Home page</li></a>
+            <br>
+            <a href="{% url 'allproducts' %}"><li>All products</li></a>
+            <br>
+            <a href="{% url 'about' %}"><li>About us</li></a>
+            <br>
+            <a href="{% url 'contact' %}"><li>Contact us</li></a>
+            <br>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'dashboard' %}"><li>Dashboard</li></a>
+                <br>
+                <a href="{% url 'logoutadmin' %}"><li>Logout Admin</li></a>
+
+            {% else %}
+                <a href="{% url 'adminlogin' %}"><li>Admin Login</li></a>
+            {% endif %}
+        </ul>
+    </div>
+    {% block content %}
+
+
+
+
+
+
+
+    {% endblock %}
+
+    <!-- footer -->
+    {% comment %} <footer>
+        <div class="footer">
+            Welcome
+        </div>
+    </footer> {% endcomment %}
+    <!-- x footer x -->
+     <!-- go top -->
+     <button onclick="goTop();" id="topBtn" title="Go to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+
+    {% comment %} js {% endcomment %}
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.min.js' %}"></script>
+    <!-- outside link js -->
+    <script src="https://kit.fontawesome.com/5c5c0d787c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

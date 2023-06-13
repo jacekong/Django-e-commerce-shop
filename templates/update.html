@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    add new product
+{% endblock title %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<header class="all-page">
+    <div class="all-box">
+        <!-- back button -->
+        <a href="javascript:window.history.back();"><i class="fa-solid fa-arrow-left-long"></i></a>
+        <!-- header name -->
+        <p>
+            Update Product
+        </p>
+        <span></span>
+    </div>
+</header>
+<!-- menu box -->
+<nav class="menu-bar">
+    <i class="fa-solid fa-bars" onclick="menuToggole(this);"></i>
+    <!-- <i class="fa-solid fa-xmark"></i> -->
+</nav>
+
+<br>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <section class="new-product">
+
+            <div class="post-body">
+                <div class="row mx-auto">
+                    <div class="col-6">
+                      {{ product_form.product_name|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                      {{ product_form.product_code|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ product_form.factory_price|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ product_form.selling_price|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ product_form.stock_status|as_crispy_field }}
+                    </div>
+                    <div class="col-6">
+                        {{ product_form.category|as_crispy_field }}
+                    </div>
+                    {{ product_form.product_size|as_crispy_field }}
+                    {{ product_form.product_des|as_crispy_field }}
+                </div>
+                
+                <br>
+                <input type="submit" value="確認" class="add-new-btn-confirm">
+                <br>
+                <br>
+            </div>
+        </section>
+
+    </form>
+
+{% endblock content %}

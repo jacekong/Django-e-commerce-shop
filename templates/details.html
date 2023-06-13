@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Details | {{ products.product_name }}
+{% endblock title %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- header -->
+<header class="all-page">
+    <div class="all-box">
+        <!-- back button -->
+        <a href="{% url 'allproducts' %}"><i class="fa-solid fa-arrow-left-long"></i></a>
+        <!-- header name -->
+        <p>
+            Details
+        </p>
+        <span></span>
+    </div>
+</header>
+<!-- menu box -->
+<nav class="menu-bar">
+    <i class="fa-solid fa-bars" onclick="menuToggole(this);"></i>
+    <!-- <i class="fa-solid fa-xmark"></i> -->
+</nav>
+
+<br>
+<!-- detail content -->
+
+<!-- 1. slide show -->
+<section class="slideshow-container">
+    {% for image in products.product_images.all %}
+        <div class="mySlides">
+            <img src="{{ image.images.url }}" style="width:100%">
+        </div>
+    {% endfor %}
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+    <div class="indicator" style="text-align:center">
+        {% for i in products.product_images.all %}
+            <span class="bar" onclick="currentSlide({{ forloop.counter }})"></span>
+        {% endfor %}
+    </div>
+</section>
+
+<br>
+<!-- price tag info -->
+<section class="item-info">
+    <!-- price -->
+    <div class="item-price">
+        <span>
+            <p>{{ products.selling_price }}rmb</p>
+        </span>
+    </div>
+    <!-- name -->
+    <span class="name">
+        <p>{{ products.product_name }}</p>
+    </span>
+    <!-- share button -->
+    <button class="share-btn" onclick="shareTosocial();"><i class="fa-solid fa-share-nodes"></i></button>
+</section>
+<br>
+<!-- description -->
+<section class="description">
+    <!-- des -->
+    <div class="des">
+        <p>{{ products.product_des }}</p>
+    </div>
+    <br>
+    <!-- size -->
+    <div class="size">
+        <span class="title"><p>Size</p></span>
+        <span class="size-list">
+            <ul>
+                <li>{{ products.product_size }}</li>
+            </ul>
+        </span>
+    </div>
+</section>
+<br>
+<hr style="margin: 0 17px;">
+<br>
+<!-- comment section -->
+<section class="comments">
+    <div class="comment-header">
+        <div class="ch">
+            <!-- title -->
+            <span class="title"><p>Comments</p></span>
+        </div>
+        <!-- ask question icon -->
+        <a class="ask" href="{% url 'contact' %}"><i class="fa-solid fa-comments fa-fade"></i></a>
+    </div>
+    <!-- add comment button -->
+    <form method="POST" enctype="multipart/form-data" id="comment-form">
+        {% csrf_token %}
+        <button type="submit" class="comment-btn">add comments</button>
+        <!-- input box -->
+        <br>
+        <div class="ml-2 mr-2">
+            {{ comment_form.comment|as_crispy_field }}
+        </div>
+    </form>
+    
+    <!-- comments list showing here -->
+    <div class="comments-container">
+        {% for comment in comments %}
+            <div class="comment-content">
+                <span class="c-user"><p>guest:</p></span>
+                <p class="content">
+                    {{ comment.comment }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<br>
+<br>
+
+{% comment %} <!-- pop-up window for customer service -->
+<section class="service">
+    <div class="popup" id="popup">
+        <!-- header -->
+        <div class="title">
+            <span></span>
+            <span class="txt">May I know your name?</span>
+            <!-- close btn -->
+            <button class="close" onclick="closePopup();"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <br>
+    </div>
+</section> {% endcomment %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<!-- Include jQuery library -->
+
+
+{% endblock content %}

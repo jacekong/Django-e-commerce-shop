@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    product management
+{% endblock title %}
+
+{% block content %}
+
+<header class="all-page">
+    <div class="all-box">
+        <!-- back button -->
+        <span></span>
+        <!-- header name -->
+        <p>
+            Product Management
+        </p>
+        <span></span>
+    </div>
+</header>
+<br>
+<!-- menu box -->
+<nav class="menu-bar">
+    <i class="fa-solid fa-bars" onclick="menuToggole(this);"></i>
+    <!-- <i class="fa-solid fa-xmark"></i> -->
+</nav>
+
+<!-- title and add new button in a row -->
+<section class="manage-title">
+    <div class="dash-box">
+        <span class="title">
+            Dashboard
+        </span>
+        <div class="add-new-btn">
+            <i class="fa-solid fa-plus"></i>
+            <a href="{% url 'addproduct' %}">Add new product</a>
+        </div>
+    </div>
+</section>
+<br>
+
+<section class="products-list-box">
+    <!-- list header -->
+    <div class="header">
+        <ul class="product-header">
+            <li>#</li>
+            <li>產品名稱</li>
+            <li>代號</li>
+            <li>工廠價格</li>
+            <li>賣出價格</li>
+            <li>庫存狀態</li>
+            <li>分類</li>
+        </ul>
+    </div>
+    <br>
+    <!-- content list -->
+    <div class="product-list">
+        <div class="product-container">
+            {% for product in products %}
+                <ul class="product-content">
+                        <li>{{ forloop.counter }}</li>
+                        <li>{{ product.product_name }}</li>
+                        <li>{{ product.product_code }}</li>
+                        <li>{{ product.factory_price }}rmb</li>
+                        <li>{{ product.selling_price }}rmb</li>
+                        <li>{{ product.stock_status }}</li>
+                        <li>{{ product.category }}</li>
+                        <li><a href="{% url 'update' product.slug %}">update</a></li>
+                </ul>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
