@@ -32,7 +32,7 @@ class Product(models.Model):
     # update
     update_at     = models.DateTimeField(auto_now=True, editable=False)
     # slug
-    slug          = models.SlugField(allow_unicode = True, unique=True, blank=True)
+    slug          = models.SlugField(allow_unicode = True, unique=True, blank=True, max_length=255)
         
     def __str__(self) -> str:
         return self.product_name
@@ -48,9 +48,9 @@ class ProductImage(models.Model):
     
 class Category(models.Model):
     cat_id    = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
-    cat_title = models.TextField(blank=False, null=False)
+    cat_title = models.CharField(max_length=255, blank=False, null=False)
     cat_img   = models.ImageField(upload_to='images', blank=False)
-    slug      = models.SlugField(allow_unicode = True, unique=True)
+    slug      = models.SlugField(allow_unicode = True, unique=True, max_length=255)
     
     def __str__(self) -> str:
         return self.cat_title
