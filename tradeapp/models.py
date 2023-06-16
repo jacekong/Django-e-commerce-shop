@@ -48,7 +48,7 @@ class ProductImage(models.Model):
     
 class Category(models.Model):
     cat_id    = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
-    cat_title = models.CharField(max_length=20)
+    cat_title = models.CharField(max_length=150)
     cat_img   = models.ImageField(upload_to='images', blank=False)
     slug      = models.SlugField(allow_unicode = True, unique=True)
     
