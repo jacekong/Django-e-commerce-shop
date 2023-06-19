@@ -776,11 +776,7 @@ html,body {
         width: auto;
     }
     .first .about {
-        display: flex;
-        height: 350px;
         padding: 7vw;
-        justify-content: center;
-        align-items: center;
         margin-top: 2vw;
     }
     .first img {
