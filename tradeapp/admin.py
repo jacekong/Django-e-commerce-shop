@@ -5,7 +5,7 @@ from .models import Comment
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('product_name',)}
     list_display        = ('product_name', 'product_code', 'factory_price', 'selling_price', 'stock_status', 'category', )
-    search_fields       = ('product_name',)
+    search_fields       = ('product_name', 'product_code',)
     list_filter         = ('category',)
     
 class CategoryAdmin(admin.ModelAdmin):
