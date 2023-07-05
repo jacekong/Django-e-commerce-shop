@@ -41,6 +41,12 @@ html,body {
     text-decoration: none;
     color: #ffffff;
 }
+.menu-items a:active {
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+}
 #topBtn {
     display: none;
     position: fixed;
@@ -91,6 +97,7 @@ html,body {
         padding: 12px;
         margin:3px 0 0 18px;
         padding: 7px 8px;
+        background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
     }
     button[type="submit"] {
         overflow: hidden;
@@ -99,7 +106,7 @@ html,body {
         cursor: pointer;
         opacity: 0.7;
         border: none;
-        background: #D9D9D9;
+        background: transparent;
       }
       
     button[type="submit"]:hover {
@@ -128,9 +135,11 @@ html,body {
     .all-link {
         display: flex;
         margin: 30px 0 30px 22px;
-        height: 25px;
-        width: 80px;
-        background: #D9D9D9;
+        max-height: 50px;
+        max-width: 150px;
+        background: #00B4DB;
+        background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+        background: linear-gradient(to right, #0083B0, #00B4DB);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
         text-align: center;
@@ -142,11 +151,13 @@ html,body {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
-        font-size: 12px;
-        line-height: 15px;
+        font-size: 15px;
         align-items: center;
         text-align: center;
         color: #5C5C5C;
+    }
+    .all-link a:active {
+        text-decoration: none;
     }
     /* cat items */
     .category {
@@ -178,6 +189,9 @@ html,body {
         font-size: 14px;
         line-height: 17px;
         text-align: center;
+    }
+    .category a:active {
+        text-decoration: none;
     }
     .product-cat span {
         padding: 3vw;
@@ -219,6 +233,9 @@ html,body {
         display: flex;
         flex-wrap: wrap;
     }
+    .f-items ul {
+        margin-left: 0;
+    }
     .f-items ul > li {
         display: flex;
         margin: 0 2vw calc( 4vw - 20px );
@@ -241,6 +258,9 @@ html,body {
         flex-wrap: wrap;
     }
     .all-products-items a {
+        text-decoration: none;
+    }
+    .all-products-items a:active {
         text-decoration: none;
     }
     .all-products {
