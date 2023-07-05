@@ -62,3 +62,12 @@ class Comment(models.Model):
     
     def __str__(self) -> str:
         return self.product.product_name
+
+class ClientViews(models.Model):
+    ip_addr = models.CharField(max_length=150, blank=True, null=True)
+    views_time = models.IntegerField(default=0, blank=True, null=True)
+    device_type = models.CharField(max_length=300, blank=True, null=True)
+    view_date = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return self.ip_addr
