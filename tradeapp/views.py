@@ -13,11 +13,32 @@ from django.core.cache import cache
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.paginator import Paginator
+import socket
+from .models import ClientViews
 
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
 
 def index(request):
+    try:
+        clients = ClientViews.objects.get()  # Assuming there is only one ClientViews object
+    except ClientViews.DoesNotExist:
+        clients = ClientViews.objects.create()  # Create a new ClientViews object if it doesn't exist
+
+    host_name = socket.gethostname()
+
+    # Check if the IP address is different
+    if clients.ip_addr != host_name:
+        clients = ClientViews.objects.create(ip_addr=host_name)
+
+    clients.views_time += 1
+
+    # Update the device_type only if it is not already set
+    if not clients.device_type:
+        header = request.META.get('HTTP_USER_AGENT')
+        clients.device_type = header
+
+    clients.save()
     # ge all categories
     categories = Category.objects.all()
     
@@ -89,6 +110,9 @@ def product_details(request, slug):
     # get product detail page
     products = get_object_or_404(Product, slug=slug)
     comment_form  = CommentForm(request.POST)
+
+    products.views_count = products.views_count + 1
+        products.save()
     
     # cache for detials
     if cache.get(slug):
