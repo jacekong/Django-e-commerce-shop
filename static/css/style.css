@@ -193,6 +193,8 @@ a:hover {
         border-radius: 7px 7px 0 0;
     }
     .category a {
+        display: inline-block;
+        width: 95%;
         color: #000000;
         text-decoration: none;
         font-weight: 600;
