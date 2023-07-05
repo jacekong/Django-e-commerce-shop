@@ -112,7 +112,7 @@ def product_details(request, slug):
     comment_form  = CommentForm(request.POST)
 
     products.views_count = products.views_count + 1
-        products.save()
+    products.save()
     
     # cache for detials
     if cache.get(slug):
