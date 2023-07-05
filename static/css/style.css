@@ -46,12 +46,11 @@ html,body {
 }
 a {
     text-decoration: none;
+a:hover {
+    color: #00B4DB;
 }
 a:active {
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: none;
+    color: #00B4DB;
 }
 #topBtn {
     display: none;
