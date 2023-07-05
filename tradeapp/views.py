@@ -4,7 +4,6 @@ from django.utils.text import slugify
 from .models import Product,Category,ProductImage
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.contrib.auth.decorators import login_required
 from .forms import ProductForm,ImageForm
 from .models import Comment
 from .forms import CommentForm
