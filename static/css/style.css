@@ -266,14 +266,14 @@ a:hover {
     }
     .all-products-items {
         width: 100%;
-        margin: 7px auto;
+        margin: 0 auto;
         columns: 2;
-        column-gap: 7px;
+        column-gap: 1px;
     }
     .all-products-items a {
-        text-decoration: none;
         display:inline-block;
-        width: 100%;
+        width: 90%;
+        text-decoration: none;
     }
     .all-products-items a:active {
         text-decoration: none;
