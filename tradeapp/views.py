@@ -5,6 +5,7 @@ from .models import Product,Category,ProductImage
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .forms import ProductForm,ImageForm
+from .models import ClientViews
 from .models import Comment
 from .forms import CommentForm
 from .forms import CategoryForm
@@ -13,7 +14,6 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.paginator import Paginator
 import socket
-from .models import ClientViews
 
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
