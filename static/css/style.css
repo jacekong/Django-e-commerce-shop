@@ -163,9 +163,10 @@ a {
     }
     /* cat items */
     .category {
-        display: flex;
-        flex: 50%;
-        flex-wrap: wrap;
+        width: 100%;
+        margin: 5px auto;
+        columns: 2;
+        column-gap: 7px;
     }
     .product-cat {
         height: auto;
@@ -174,8 +175,8 @@ a {
         display: flex;
         flex-direction: column;
         text-align: center;
-        margin-left: 3vw;
-        margin-bottom: 35px;
+        margin-left: 2vw;
+        margin-bottom: 26px;
         border-radius: 7px;
     }
     .product-cat img {
