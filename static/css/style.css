@@ -46,6 +46,7 @@ html,body {
 }
 a {
     text-decoration: none;
+}
 a:hover {
     color: #00B4DB;
 }
