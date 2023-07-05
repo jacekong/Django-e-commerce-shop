@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Product, Category, ProductImage
-from .models import Comment
+from .models import Comment, ClientViews
 
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('product_name',)}
@@ -17,8 +17,12 @@ class ImageAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display        = ('product', 'comment', 'date_created')
-    
+
+class ClientsAdmin(admin.ModelAdmin):
+    list_display = ('ip_addr', 'device_type', 'views_time', 'view_date',)
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(ProductImage, ImageAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(ClientViews, ClientsAdmin)
