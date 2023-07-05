@@ -185,6 +185,7 @@ a:hover {
         margin-left: 2vw;
         margin-bottom: 26px;
         border-radius: 7px;
+        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
     .product-cat img {
         width: 100%;
