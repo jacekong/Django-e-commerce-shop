@@ -26,10 +26,17 @@
     </nav>
     <br>
 
-    <section class="filter">
-        <div class="f-icon">
+<!--     collapse btn -->
+    <p style="display: flex; justify-content: center;">
+        <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseCat" role="button" aria-expanded="false" aria-controls="collapseCat">
+          Tap to see all categories
+        </a>
+    </p>
+
+    <section class="filter collapse" id="collapseCat">
+<!--         <div class="f-icon">
             <i class="fa-solid fa-arrow-up-wide-short"></i>
-        </div>
+        </div> -->
         <div class="f-items">
             <ul>
                 <li><a href="{% url 'allproducts' %}">All</a></li>
