@@ -39,9 +39,6 @@ class Product(models.Model):
         
     def __str__(self) -> str:
         return self.product_name
-        
-    def __str__(self) -> str:
-        return self.product_name
     
     def save(self, *args, **kwargs):
         is_new = self.pk is None  # Check if the object is being saved for the first time
