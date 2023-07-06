@@ -39,9 +39,6 @@ class Product(models.Model):
         
     def __str__(self) -> str:
         return self.product_name
-
-     # views count
-    views_count   = models.IntegerField(default=0, null=True, blank=True)
         
     def __str__(self) -> str:
         return self.product_name
