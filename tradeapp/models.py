@@ -35,7 +35,7 @@ class Product(models.Model):
     # slug
     slug          = models.SlugField(allow_unicode = True, unique=True, blank=True, max_length=255)
     # count views
-    views_count   = models.IntegerField(default=0, null=True, blank=True)
+    views_count = models.BigIntegerField(default=0, null=True, blank=True)
         
     def __str__(self) -> str:
         return self.product_name
