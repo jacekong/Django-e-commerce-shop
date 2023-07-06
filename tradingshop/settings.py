@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'multiupload',
     'contact',
+    'hitcount',
 ]
 
 ASGI_APPLICATION = 'tradingshop.routing.application'
