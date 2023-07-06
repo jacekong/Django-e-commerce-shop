@@ -69,7 +69,7 @@ class ClientViews(models.Model):
     ip_addr = models.CharField(max_length=150, blank=True, null=True)
     views_time = models.IntegerField(default=0, blank=True, null=True)
     device_type = models.CharField(max_length=300, blank=True, null=True)
-    view_date = models.DateTimeField(auto_now_add=True)
+    view_date = models.DateTimeField(auto_now=True)
     
     def __str__(self) -> str:
         return self.ip_addr
