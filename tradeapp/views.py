@@ -18,26 +18,56 @@ import socket
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
 
+def get_client_ip(request):
+    """get the client ip from the request
+    """
+    remote_address = request.META.get('REMOTE_ADDR')
+    # set the default value of the ip to be the REMOTE_ADDR if available
+    # else None
+    ip = remote_address
+    # try to get the first non-proxy ip (not a private ip) from the
+    # HTTP_X_FORWARDED_FOR
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        proxies = x_forwarded_for.split(',')
+        # remove the private ips from the beginning
+        while (len(proxies) > 0 and
+                proxies[0].startswith(PRIVATE_IPS_PREFIX)):
+            proxies.pop(0)
+        # take the first ip which is not a private one (of a proxy)
+        if len(proxies) > 0:
+            ip = proxies[0]
+
+    return ip
+
 def index(request):
+    existing_clients = ClientViews.objects.filter()  # Retrieve all ClientViews objects
+
+    if existing_clients.exists():
+        existing_client = existing_clients[0]  # Select the first object
+    else:
+        existing_client = None
+
     try:
-        clients = ClientViews.objects.get()  # Assuming there is only one ClientViews object
-    except ClientViews.DoesNotExist:
-        clients = ClientViews.objects.create()  # Create a new ClientViews object if it doesn't exist
-
-    ipaddr = socket.gethostname()
-
-    # Check if the IP address is different
-    if clients.ip_addr != ipaddr:
-        clients = ClientViews.objects.create(ip_addr=ipaddr)
-
-    clients.views_time += 1
-
-    # Update the device_type only if it is not already set
-    if not clients.device_type:
+        c_ip = get_client_ip(request)
         header = request.META.get('HTTP_USER_AGENT')
-        clients.device_type = header
 
-    clients.save()
+        if existing_client and (existing_client.ip_addr != c_ip or existing_client.device_type != header):
+            new_client = ClientViews.objects.create(ip_addr=c_ip, device_type=header)
+            new_client.views_time = existing_client.views_time + 1
+            new_client.save()
+        elif not existing_client:
+            new_client = ClientViews.objects.create(ip_addr=c_ip, device_type=header)
+            new_client.views_time = 1
+            new_client.save()
+        else:
+            existing_client.views_time += 1
+            existing_client.save()
+
+    except Exception as e:
+        # Handle any exceptions that occurred during the data saving process
+        return e
+        
     # ge all categories
     categories = Category.objects.all()
     
