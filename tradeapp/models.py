@@ -1,6 +1,5 @@
 from django.db import models
 import uuid
-from hitcount.models import HitCountMixin, HitCount
 
 # global var for stock status
 STOCK_STATUS =  [
@@ -39,19 +38,6 @@ class Product(models.Model):
         
     def __str__(self) -> str:
         return self.product_name
-    
-    def save(self, *args, **kwargs):
-        is_new = self.pk is None  # Check if the object is being saved for the first time
-        
-        super().save(*args, **kwargs)
-        
-        if is_new:
-            hit_count = HitCount.objects.create(content_object=self)
-        else:
-            hit_count = HitCount.objects.get_for_object(self)
-        
-        self.views_count = str(hit_count.hits)
-        super().save(update_fields=['views_count'])
 
 # multi images model for product 
 class ProductImage(models.Model):
