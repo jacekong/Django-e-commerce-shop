@@ -17,6 +17,7 @@ from django.core.paginator import Paginator
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
 
+PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
 def get_client_ip(request):
     """get the client ip from the request
     """
