@@ -13,6 +13,7 @@ from django.core.cache import cache
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.paginator import Paginator
+import socket
 
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
@@ -23,7 +24,7 @@ def index(request):
     except ClientViews.DoesNotExist:
         clients = ClientViews.objects.create()  # Create a new ClientViews object if it doesn't exist
 
-    ipaddr = request.META.get('REMOTE_ADDR')
+    ipaddr = socket.gethostname()
 
     # Check if the IP address is different
     if clients.ip_addr != ipaddr:
