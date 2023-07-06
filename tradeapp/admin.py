@@ -4,7 +4,7 @@ from .models import Comment, ClientViews
 
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('product_name',)}
-    list_display        = ('product_name', 'product_code', 'factory_price', 'selling_price', 'stock_status', 'category', )
+    list_display        = ('product_name', 'product_code', 'factory_price', 'selling_price', 'stock_status', 'category', 'views_count',)
     search_fields       = ('product_name', 'product_code',)
     list_filter         = ('category',)
     
