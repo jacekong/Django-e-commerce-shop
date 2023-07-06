@@ -13,6 +13,8 @@ from django.core.cache import cache
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.paginator import Paginator
+from django.views.generic import DetailView
+from hitcount.views import HitCountDetailView
 
 
 CACHE_TTL = getattr(settings ,'CACHE_TTL' , DEFAULT_TIMEOUT)
@@ -135,52 +137,36 @@ def all_products(request):
     
     return render(request, 'allproducts.html', context)
 
-def product_details(request, slug):
-    # get product detail page
-    products = get_object_or_404(Product, slug=slug)
-    comment_form  = CommentForm(request.POST)
+class ProductDetailView(HitCountDetailView, DetailView):
+    model = Product
+    template_name = 'details.html'
+    count_hit = True  # Enable hit counting
 
-    products.views_count = products.views_count + 1
-    products.save()
-    
-    # cache for detials
-    if cache.get(slug):
-        comment_form  = CommentForm()
-        products = cache.get(slug)
-    else:
-        comment_form  = CommentForm()
-        products = get_object_or_404(Product, slug=slug)
-        cache.set(slug, products)
-        
-    # comment_form  = CommentForm(request.POST, instance=products)
-    if request.method == "POST":
-        
-        comment_form  = CommentForm(request.POST)
-        
-        if comment_form.is_valid():
-            
-            comment = comment_form.save(commit=False)
-            comment.product = products
-            comment.save()
-            
-            # Clear the form for the next comment
+    def count_hit_response(self, hitcount):
+        # Increment the hit count in the database
+        self.object.views_count = hitcount.hits
+        self.object.save()
+        return super().count_hit_response(hitcount)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comment_form = CommentForm(self.request.POST or None)
+        product = context['object']
+
+        if self.request.method == 'POST':
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.product = product
+                comment.save()
+                comment_form = CommentForm()
+        else:
             comment_form = CommentForm()
-    
-    else:
-        # If it's a GET request, create an empty comment form
-        comment_form = CommentForm()
-        
-            
-   
-    comments = Comment.objects.filter(product=products).order_by('-date_created')
-        
-    context = {
-        'products':products,
-        'comment_form': comment_form,
-        'comments':comments,
-    }
-    
-    return render(request, 'details.html', context)
+
+        comments = Comment.objects.filter(product=product).order_by('-date_created')
+        context['comment_form'] = comment_form
+        context['comments'] = comments
+
+        return context
 
 def about_us(request):
     context = {}
