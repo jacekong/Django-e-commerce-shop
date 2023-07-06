@@ -4,7 +4,7 @@ from tradeapp.views import *
 urlpatterns = [
     path('', index, name='index'),
     path('all-products/', all_products, name='allproducts'),
-    path('product-details/<str:slug>', product_details, name='productdetails'),
+    path('product-details/<str:slug>', ProductDetailView.as_view(), name='productdetails'),
     path('dashboard/', product_management, name='dashboard'),
     path('addproduct/', add_product, name='addproduct'),
     path('about/', about_us, name='about'),
