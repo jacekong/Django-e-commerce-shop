@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f#m507i5yw7i15%nsx^$^^*o)+o=^n-ijf6**863pk0t%gy-lz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['54.153.162.113']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'tradingshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'companysite',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': ''
     }
 }
